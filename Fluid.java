@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class Fluid extends Particle{
 
-    int maxFlow = 5;
+    int maxFlow = 2;
     int nudgePercentage = 10;
 
     public Fluid(int x, int y){
@@ -20,18 +20,60 @@ public class Fluid extends Particle{
     @Override
     public void update(Grid g){
         
-        if(!fluidSettleDown(g, nudgePercentage, maxFlow)){
+        fluidUpdate(g, maxFlow, nudgePercentage);
+        // if(!fluidSettleDown(g, nudgePercentage, maxFlow)){
+        //     if(Math.random()*2 >= 1){
+        //         if(!fluidSettleLeft(g, maxFlow))
+        //             fluidSettleRight(g, maxFlow);
+        //     }
+        //     else{
+        //         if(!fluidSettleRight(g, maxFlow))
+        //             fluidSettleLeft(g, maxFlow);
+        //     }
+        // }
+    }
+    
+
+    public void fluidUpdate(Grid g, int flow, int nudge){
+        if(fluidSettleDown(g, nudge, flow))
+            return;
+        else{
             if(Math.random()*2 >= 1){
-                if(!fluidSettleLeft(g, maxFlow))
-                    fluidSettleRight(g, maxFlow);
+                if(fluidSettleLeft(g, flow))
+                    return;
+                else{
+                    if(fluidSettleRight(g, flow))
+                        return;
+                }
             }
             else{
-                if(!fluidSettleRight(g, maxFlow))
-                    fluidSettleLeft(g, maxFlow);
+                if(fluidSettleRight(g, flow))
+                    return;
+                else{
+                    if(fluidSettleLeft(g, flow))
+                        return;
+                }
+            }
+        }
+        fluidJiggle(g);
+    }
+
+    public void fluidJiggle(Grid g){
+        if((getX() != 0) && (getX() != g.gridSizeX-1)){
+            if(Math.random()*2 >= 1){
+                if(g.particleGrid[getX()+1][getY()].isEmpty)
+                    g.swap(getX(), getY(), getX()+1, getY());
+                else if(g.particleGrid[getX()-1][getY()].isEmpty)
+                    g.swap(getX(), getY(), getX()-1, getY());
+            }
+            else{
+                if(g.particleGrid[getX()-1][getY()].isEmpty)
+                    g.swap(getX(), getY(), getX()-1, getY());
+                else if(g.particleGrid[getX()+1][getY()].isEmpty)
+                    g.swap(getX(), getY(), getX()+1, getY());
             }
         }
     }
-    
 
     
     
