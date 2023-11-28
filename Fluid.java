@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Fluid extends Particle{
 
@@ -13,7 +11,6 @@ public class Fluid extends Particle{
         isEmpty = false;
         rgb = c.getRGB();
         density = 1.5;
-        type = "Fluid";
     }
 
     

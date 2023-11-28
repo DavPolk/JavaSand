@@ -8,7 +8,6 @@ public class Sand extends Particulate{
         isEmpty = false;
         rgb = c.getRGB();
         density = 2.0;
-        type = "Particulate";
+        element = Element.SAND;
     }
-    
 }

@@ -8,6 +8,6 @@ public class Water extends Fluid{
         isEmpty = false;
         rgb = c.getRGB();
         density = 1.5;
-        type = "Fluid";
+        element = Element.WATER;
     }
 }

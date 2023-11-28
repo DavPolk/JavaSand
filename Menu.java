@@ -1,8 +1,4 @@
 import java.awt.*;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-
-import javax.swing.*;
 
 public class Menu{
 
@@ -15,6 +11,8 @@ public class Menu{
     public Rectangle sandButton = new Rectangle(100, 495, 60, 25);
     public Rectangle waterButton = new Rectangle(100, 525, 60, 25);
     public Rectangle stoneButton = new Rectangle(100, 555, 60, 25);
+
+    public Rectangle plantButton = new Rectangle(170, 495, 60, 25);
 
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
@@ -40,6 +38,8 @@ public class Menu{
         g2d.draw(resetButton);
         g.drawString("Spout",  spoutButton.x+12, spoutButton.y+18);
         g2d.draw(spoutButton);
+        g.drawString("Plant",  plantButton.x+12, plantButton.y+18);
+        g2d.draw(plantButton);
     }
 
 

@@ -61,6 +61,8 @@ public class Grid {
             particleGrid[x][y] = new Water(x, y);
         if(e == Element.STONE)
             particleGrid[x][y] = new Stone(x, y);
+        if(e == Element.PLANT)
+            particleGrid[x][y] = new Plant(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){
@@ -77,5 +79,34 @@ public class Grid {
     
     public void spawnSpout(int x, int y, Element e){
             particleGrid[x][y] = new Spout(x, y, e);
+    }
+
+    //returns an arrayList of coordinate pairs of neighbor particles
+    public ArrayList <int[]> getNeighbors(int x, int y){
+        ArrayList <int[]> neighborList = new ArrayList<int[]>();
+
+        int[][] neighbors = {{x-1, y-1}, {x, y-1}, {x+1, y-1}, {x-1, y}, {x+1, y}, {x-1, y+1}, {x, y+1}, {x+1, y+1}};
+
+        for(int i = 0; i < 8; i++){
+            if (neighbors[i][0] >= 0 && neighbors[i][0] < gridSizeX){
+                if(neighbors[i][1] >= 0 && neighbors[i][1] < gridSizeY){
+                    int[] coords = neighbors[i];
+                    neighborList.add(coords);
+                }
+            }
+        }
+        return neighborList;
+        
+    }
+
+    public ArrayList <int[]> getNeighborsOfElement(int x, int y, Element e){ 
+        ArrayList <int[]> neighbors = getNeighbors(x, y);
+        ArrayList <int[]> result = new ArrayList<int[]>();
+        for(int i = 0; i < neighbors.size(); i++){
+            if(particleGrid[neighbors.get(i)[0]][neighbors.get(i)[1]].element == e){
+                result.add(neighbors.get(i));
+            }
+        }
+        return result;
     }
 }

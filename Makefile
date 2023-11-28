@@ -2,7 +2,7 @@
 JC = javac
 
 #Rule to build the classes
-default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseInput.class MouseMotionInput.class Sand.class Stone.class
+default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseMotionInput.class Sand.class Stone.class Plant.class
 
 #Rule to build main.class
 Main.class: Main.java
@@ -29,9 +29,6 @@ Spout.class: Spout.java
 Menu.class: Menu.java
 	$(JC) -g Menu.java
 
-MouseInput.class: MouseInput.java
-	$(JC) -g MouseInput.java
-
 MouseMotionInput.class: MouseMotionInput.java
 	$(JC) -g MouseMotionInput.java
 
@@ -40,6 +37,9 @@ Sand.class: Sand.java
 
 Stone.class: Stone.java
 	$(JC) -g Stone.java
+
+Plant.class: Plant.java
+	$(JC) -g Plant.java
 
 # Target to run main
 run: default

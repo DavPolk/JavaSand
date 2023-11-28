@@ -6,5 +6,6 @@ public class Stone extends Solid {
         super(x, y);
         c = new Color(200, 200, 200);
         rgb = c.getRGB();
+        element = Element.STONE;
     }
 }

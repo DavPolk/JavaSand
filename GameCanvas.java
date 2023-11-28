@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -25,7 +24,7 @@ public class GameCanvas extends Canvas implements Runnable{
 
     public void run(){
         long lastTime = System.nanoTime();
-        final double amountOfTicks = 30.0;  //max game updates per second
+        final double amountOfTicks = 40.0;  //max game updates per second
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         int updates = 0;
@@ -33,11 +32,9 @@ public class GameCanvas extends Canvas implements Runnable{
         long timer = System.currentTimeMillis();
         grid = new Grid();
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        MouseInput mi = new MouseInput();
         MouseMotionInput mm = new MouseMotionInput();
         mm.loadGame(this);
-        mi.loadGame(this);
-        this.addMouseListener(mi);
+        this.addMouseListener(mm);
         this.addMouseMotionListener(mm);
         menu.loadGame(this);
 

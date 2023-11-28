@@ -11,7 +11,7 @@ public class Particle {
     public double density;
 
     public boolean isEmpty;
-    public String type;
+    public Element element;
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -23,7 +23,7 @@ public class Particle {
         isEmpty = true;
         rgb = c.getRGB();
         density = 0.0;
-        type = "Empty";
+        element = Element.EMPTY;
     }
 
     //have to define this here so it can be overridden

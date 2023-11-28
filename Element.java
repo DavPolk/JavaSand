@@ -1,3 +1,3 @@
 public enum Element{
-    SAND, WATER, STONE;
+    SAND, WATER, STONE, EMPTY, PLANT;
 }

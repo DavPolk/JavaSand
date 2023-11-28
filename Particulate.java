@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.*;
 
 public class Particulate extends Particle{
     int maxFlow = 1;
@@ -12,7 +11,6 @@ public class Particulate extends Particle{
         isEmpty = false;
         rgb = c.getRGB();
         density = 2.0;
-        type = "Particulate";
     }
 
     @Override
