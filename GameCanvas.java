@@ -13,6 +13,9 @@ public class GameCanvas extends Canvas implements Runnable{
     public static final int SCALE = 3;
     public final String TITLE = "Java Sand";
     public Element selectedElement = Element.SAND;
+    public Element selectedSpoutElement = Element.WATER;
+    public boolean selectedSpout = false;
+    public int brushSize = 2;
 
     private boolean running = false;
     private Thread thread;
@@ -61,15 +64,6 @@ public class GameCanvas extends Canvas implements Runnable{
             }
         }
         */
-
-        grid.particleGrid[70][80] = new Spout(70, 80);
-        grid.particleGrid[71][80] = new Spout(71, 80);
-        grid.particleGrid[72][80] = new Spout(72, 80);
-        grid.particleGrid[73][80] = new Spout(73, 80);
-        grid.particleGrid[74][80] = new Spout(74, 80);
-
-        grid.particleGrid[30][80] = new ParticulateSpout(30, 80);      
-
 
 
         //game loop

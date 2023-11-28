@@ -15,6 +15,14 @@ public class Grid {
         }
     }
 
+    public void reset(){
+        for(int i = 0; i < gridSizeX; i++){
+            for(int j = 0; j < gridSizeY; j++){
+                particleGrid[i][j] = new Particle(i, j);
+            }
+        }
+    }
+
     public int getSizeX(){
         return gridSizeX;
     }
@@ -53,5 +61,21 @@ public class Grid {
             particleGrid[x][y] = new Water(x, y);
         if(e == Element.STONE)
             particleGrid[x][y] = new Stone(x, y);
+    }
+
+    public void paintSpout(int x, int y, Element e, int brushSize){
+        for(int i = 0; i < brushSize; i++){
+            if((i+x) <= gridSizeX){
+                for(int j = 0; j < brushSize; j++){
+                    if((i+j) <= gridSizeY){
+                        spawnSpout(x+i, y+j, e);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void spawnSpout(int x, int y, Element e){
+            particleGrid[x][y] = new Spout(x, y, e);
     }
 }

@@ -10,6 +10,15 @@ public class Spout extends Solid{
         currentElement = Element.WATER;
     }
 
+    public Spout(int x, int y, Element e){
+        super(x, y);
+        c = new Color(100, 100, 255);
+        isEmpty = false;
+        rgb = c.getRGB();
+        density = 999;
+        currentElement = e;
+    }
+
     public int spawnPercent = 50;
     public Element currentElement;
     @Override

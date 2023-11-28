@@ -22,7 +22,12 @@ public class MouseMotionInput implements MouseMotionListener {
                 int gridX = (int) (mx / game.SCALE);
                 int gridY = (int) (topOfMenu - my) / game.SCALE;
 
-                game.grid.paintElement(gridX, gridY, game.selectedElement, 2);
+                if(game.selectedSpout){
+                    game.grid.paintSpout(gridX, gridY, game.selectedElement, game.brushSize);
+                }
+                else{
+                    game.grid.paintElement(gridX, gridY, game.selectedElement, game.brushSize);
+                }
             }
         }
 
