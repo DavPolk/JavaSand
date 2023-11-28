@@ -9,4 +9,8 @@ public class Solid extends Particle{
         rgb = c.getRGB();
         density = 999;
     }
+
+    @Override
+    public void update(Grid g){
+    }
 }

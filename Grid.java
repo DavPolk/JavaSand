@@ -28,6 +28,7 @@ public class Grid {
     }
     //swap the positions of two particles and update their internal coordinates
     public void swap(int x1, int y1, int x2, int y2){
+
         int tempx = x1;
         int tempy = y1;
 
@@ -40,6 +41,14 @@ public class Grid {
         Particle tempP = particleGrid[x1][y1];
         particleGrid[x1][y1] = particleGrid[x2][y2];
         particleGrid[x2][y2] = tempP;
+        
+        // if(particleGrid[x1][y1].element == Element.FIRE){
+        //     particleGrid[x1][y1].density = 0;
+        // }
+        // if(particleGrid[x2][y2].element == Element.FIRE){
+        //     particleGrid[x2][y2].density = 0;
+        // }
+
     }
 
     public void paintElement(int x, int y, Element e, int brushSize){
@@ -63,6 +72,10 @@ public class Grid {
             particleGrid[x][y] = new Stone(x, y);
         if(e == Element.PLANT)
             particleGrid[x][y] = new Plant(x, y);
+        if(e == Element.FIRE)
+            particleGrid[x][y] = new Fire(x, y);
+        if(e == Element.GUNPOWDER)
+            particleGrid[x][y] = new Gunpowder(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){
@@ -99,6 +112,7 @@ public class Grid {
         
     }
 
+    //returns an arrayList of coordinate pairs of neighbor particles of a specific elemennt
     public ArrayList <int[]> getNeighborsOfElement(int x, int y, Element e){ 
         ArrayList <int[]> neighbors = getNeighbors(x, y);
         ArrayList <int[]> result = new ArrayList<int[]>();

@@ -2,12 +2,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Plant extends Solid {
-    int spreadPercent = 15;
+    int spreadPercent = 10;
 
     public Plant(int x, int y) {
         super(x, y);
         c = new Color(10, 200, 10);
         rgb = c.getRGB();
+        flammability = 4;
     }
 
     @Override

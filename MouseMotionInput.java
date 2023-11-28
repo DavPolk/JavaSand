@@ -49,9 +49,25 @@ public class MouseMotionInput extends MouseAdapter{
         // public Rectangle stoneButton = new Rectangle(100, 555, 60, 25);
 
         // public Rectangle plantButton = new Rectangle(170, 495, 60, 25);
+        // public Rectangle fireButton = new Rectangle(170, 525, 60, 25);
+        // public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
 
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
+
+        //gunpowder button
+        if (mx >= 170 && mx <= 230){
+            if (my >= 555 && my <= 580){
+                game.selectedElement = Element.GUNPOWDER;
+            }
+        }
+
+        //fire button
+        if (mx >= 170 && mx <= 230){
+            if (my >= 525 && my <= 550){
+                game.selectedElement = Element.FIRE;
+            }
+        }
 
         //plant button
         if (mx >= 170 && mx <= 230){

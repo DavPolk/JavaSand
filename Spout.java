@@ -19,11 +19,15 @@ public class Spout extends Solid{
         currentElement = e;
     }
 
-    public int spawnPercent = 50;
+    public int spawnPercent = 20;
     public Element currentElement;
     @Override
     public void update(Grid g){
-        if(Math.random()*100 <= spawnPercent){
+
+        if(currentElement == Element.FIRE){
+            g.spawnElement(getX(), getY()+1, currentElement);
+        }
+        else if(Math.random()*100 <= spawnPercent){
             g.spawnElement(getX(), getY()-1, currentElement);
         }
     }

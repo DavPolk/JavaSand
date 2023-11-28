@@ -13,6 +13,8 @@ public class Menu{
     public Rectangle stoneButton = new Rectangle(100, 555, 60, 25);
 
     public Rectangle plantButton = new Rectangle(170, 495, 60, 25);
+    public Rectangle fireButton = new Rectangle(170, 525, 60, 25);
+    public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
 
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
@@ -40,6 +42,10 @@ public class Menu{
         g2d.draw(spoutButton);
         g.drawString("Plant",  plantButton.x+12, plantButton.y+18);
         g2d.draw(plantButton);
+        g.drawString("Fire",  fireButton.x+12, fireButton.y+18);
+        g2d.draw(fireButton);
+        g.drawString("Gunpow",  gpButton.x+12, gpButton.y+18);
+        g2d.draw(gpButton);
     }
 
 

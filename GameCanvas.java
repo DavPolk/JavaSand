@@ -24,7 +24,7 @@ public class GameCanvas extends Canvas implements Runnable{
 
     public void run(){
         long lastTime = System.nanoTime();
-        final double amountOfTicks = 40.0;  //max game updates per second
+        final double amountOfTicks = 60.0;  //max game updates per second
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         int updates = 0;

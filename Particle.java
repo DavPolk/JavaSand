@@ -5,13 +5,12 @@ public class Particle {
 
     public Color c;
     public int rgb;
-
     private int gridX;
     private int gridY;
     public double density;
-
     public boolean isEmpty;
     public Element element;
+    public int flammability;
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -24,11 +23,13 @@ public class Particle {
         rgb = c.getRGB();
         density = 0.0;
         element = Element.EMPTY;
+        flammability = 0;
     }
 
     //have to define this here so it can be overridden
     //since grid is an array of particles, it can only call functions defined in Particle, child functions arent visible 
     public void update(Grid g){
+        //tryGravity(g, 1, 0);
     }
 
     public void randomizeColor(){
@@ -89,6 +90,7 @@ public class Particle {
     public boolean settleLeft(Grid g, int maxFlowDist){
         if(getY() == 0){
                 //sit on bottom for now. might delete particles on touching bottom later
+                this.replaceWithEmpty(g);
                 return true;
         }
 
@@ -116,6 +118,7 @@ public class Particle {
     public boolean settleRight(Grid g, int maxFlowDist){
         if(getY() == 0){
                 //sit on bottom for now. might delete particles on touching bottom later
+                this.replaceWithEmpty(g);
                 return true;
         }
 
@@ -138,8 +141,8 @@ public class Particle {
     //Move particle down, if possible. Chance to return false to allow particle to move to the sides while midair
     public boolean settleDown(Grid g, int nudgePercentage){
         if(getY() == 0){
-                //sit on bottom for now. might delete particles on touching bottom later
-                return true;
+            this.replaceWithEmpty(g);
+            return true;
         }
         if (Math.random()*100 < nudgePercentage)
             return false;
@@ -161,6 +164,7 @@ public class Particle {
     public boolean fluidSettleRight(Grid g, int maxFlowDist){
         if(getY() == 0){
                 //sit on bottom for now. might delete fluids on touching bottom later
+                this.replaceWithEmpty(g);
                 return true;
         }
 
@@ -186,6 +190,7 @@ public class Particle {
     public boolean fluidSettleLeft(Grid g, int maxFlowDist){
         if(getY() == 0){
                 //sit on bottom for now. might delete fluids on touching bottom later
+                this.replaceWithEmpty(g);
                 return true;
         }
 
@@ -212,6 +217,7 @@ public class Particle {
     public boolean fluidSettleDown(Grid g, int nudgePercentage, int maxFlow){
         if(getY() == 0){
                 //sit on bottom for now. might delete fluids on touching bottom later
+                this.replaceWithEmpty(g);
                 return true;
         }
         //attempt to nudge
@@ -249,9 +255,26 @@ public class Particle {
         }
         return false;
     }
+
+    public void fluidJiggle(Grid g, int percent){
+        if(Math.random()*100 <= percent){
+            if((getX() != 0) && (getX() != g.gridSizeX-1)){
+                if(Math.random()*2 >= 1){
+                    if(g.particleGrid[getX()+1][getY()].isEmpty)
+                        g.swap(getX(), getY(), getX()+1, getY());
+                    else if(g.particleGrid[getX()-1][getY()].isEmpty)
+                        g.swap(getX(), getY(), getX()-1, getY());
+                }
+                else{
+                    if(g.particleGrid[getX()-1][getY()].isEmpty)
+                        g.swap(getX(), getY(), getX()-1, getY());
+                    else if(g.particleGrid[getX()+1][getY()].isEmpty)
+                        g.swap(getX(), getY(), getX()+1, getY());
+                }
+            }
+        }
+    }
 }
-
-
 
 
 

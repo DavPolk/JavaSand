@@ -41,24 +41,7 @@ public class Fluid extends Particle{
                 }
             }
         }
-        fluidJiggle(g);
-    }
-
-    public void fluidJiggle(Grid g){
-        if((getX() != 0) && (getX() != g.gridSizeX-1)){
-            if(Math.random()*2 >= 1){
-                if(g.particleGrid[getX()+1][getY()].isEmpty)
-                    g.swap(getX(), getY(), getX()+1, getY());
-                else if(g.particleGrid[getX()-1][getY()].isEmpty)
-                    g.swap(getX(), getY(), getX()-1, getY());
-            }
-            else{
-                if(g.particleGrid[getX()-1][getY()].isEmpty)
-                    g.swap(getX(), getY(), getX()-1, getY());
-                else if(g.particleGrid[getX()+1][getY()].isEmpty)
-                    g.swap(getX(), getY(), getX()+1, getY());
-            }
-        }
+        fluidJiggle(g, 50);
     }
 
     
