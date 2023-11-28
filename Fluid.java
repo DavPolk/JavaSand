@@ -4,12 +4,12 @@ import java.util.Collections;
 
 public class Fluid extends Particle{
 
-    int maxFlow = 2;
+    int maxFlow = 3;
     int nudgePercentage = 10;
 
     public Fluid(int x, int y){
         super(x, y);
-        c = new Color(20, 10, 230);
+        c = new Color(20, 230, 20);
         isEmpty = false;
         rgb = c.getRGB();
         density = 1.5;
@@ -19,18 +19,7 @@ public class Fluid extends Particle{
     
     @Override
     public void update(Grid g){
-        
         fluidUpdate(g, maxFlow, nudgePercentage);
-        // if(!fluidSettleDown(g, nudgePercentage, maxFlow)){
-        //     if(Math.random()*2 >= 1){
-        //         if(!fluidSettleLeft(g, maxFlow))
-        //             fluidSettleRight(g, maxFlow);
-        //     }
-        //     else{
-        //         if(!fluidSettleRight(g, maxFlow))
-        //             fluidSettleLeft(g, maxFlow);
-        //     }
-        // }
     }
     
 

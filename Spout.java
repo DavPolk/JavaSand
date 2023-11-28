@@ -7,13 +7,15 @@ public class Spout extends Solid{
         isEmpty = false;
         rgb = c.getRGB();
         density = 999;
+        currentElement = Element.WATER;
     }
 
+    public int spawnPercent = 50;
+    public Element currentElement;
     @Override
     public void update(Grid g){
-
-        if(g.particleGrid[getX()][getY()-1].isEmpty){
-            g.particleGrid[getX()][getY()-1] = new Fluid(getX(), getY()-1);
+        if(Math.random()*100 <= spawnPercent){
+            g.spawnElement(getX(), getY()-1, currentElement);
         }
     }
 }

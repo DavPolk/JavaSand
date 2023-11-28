@@ -8,7 +8,7 @@ public class Particulate extends Particle{
 
     public Particulate(int x, int y){
         super(x, y);
-        c = new Color(217, 184, 44);
+        c = new Color(20, 184, 44);
         isEmpty = false;
         rgb = c.getRGB();
         density = 2.0;

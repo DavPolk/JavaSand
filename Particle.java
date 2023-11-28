@@ -19,14 +19,14 @@ public class Particle {
     public Particle(int x, int y){
         gridX = x;
         gridY = y;
-        c = new Color(0, 0, 0);
+        c = new Color(30, 30, 30);
         isEmpty = true;
         rgb = c.getRGB();
         density = 0.0;
         type = "Empty";
     }
 
-    //have to declare define this here so it can be overridden
+    //have to define this here so it can be overridden
     //since grid is an array of particles, it can only call functions defined in Particle, child functions arent visible 
     public void update(Grid g){
     }
