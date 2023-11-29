@@ -11,6 +11,11 @@ public class Particle {
     public boolean isEmpty;
     public Element element;
     public int flammability;
+    public boolean ignoreNextGravity = false; //tells particle to ignore next gravity update
+    public boolean beenGravLeft = false; //has already been pulled left by a gravwell this tick
+    public boolean beenGravRight = false;
+    public boolean beenGravUp = false;
+    public boolean beenGravDown = false;
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -78,15 +83,20 @@ public class Particle {
     //Particles move by swapping locations
     //Can move down into empty cells or Particles with lower densities
     public void tryGravity(Grid g, int maxFlowDist, int nudgePercentage){
-        if(!settleDown(g, nudgePercentage)){
-            if(Math.random()*2 >= 1){
-                if(!settleLeft(g, maxFlowDist))
-                    settleRight(g, maxFlowDist);
+        if(!ignoreNextGravity){
+            if(!settleDown(g, nudgePercentage)){
+                if(Math.random()*2 >= 1){
+                    if(!settleLeft(g, maxFlowDist))
+                        settleRight(g, maxFlowDist);
+                }
+                else{
+                    if(!settleRight(g, maxFlowDist))
+                        settleLeft(g, maxFlowDist);
+                }
             }
-            else{
-                if(!settleRight(g, maxFlowDist))
-                    settleLeft(g, maxFlowDist);
-            }
+        }
+        else{
+            ignoreNextGravity = false;
         }
     }
     
@@ -278,6 +288,13 @@ public class Particle {
                 }
             }
         }
+    }
+
+    public void resetGravMarkers(){
+        beenGravLeft = false; //has already been pulled left by a gravwell this tick
+        beenGravRight = false;
+        beenGravUp = false;
+        beenGravDown = false;
     }
 }
 

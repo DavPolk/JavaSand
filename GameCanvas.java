@@ -112,9 +112,13 @@ public class GameCanvas extends Canvas implements Runnable{
         for(int i = 0; i < grid.gridSizeX; i++){
             for(int j = 0; j < grid.gridSizeY; j++){
                 grid.particleGrid[i][j].update(grid);
+                grid.particleGrid[i][j].resetGravMarkers();
             }
         }
-        //System.out.println(grid.conwaysToAdd.size());
+
+
+        //handle conway updates
+        //have to do this all at once instead of in individual particle updates or everything goes sideways
         for(int i = 0; i < grid.conwaysToAdd.size(); i++){
             grid.spawnElement(grid.conwaysToAdd.get(i)[0], grid.conwaysToAdd.get(i)[1], Element.CONWAY);
         }

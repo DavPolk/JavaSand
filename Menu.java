@@ -22,6 +22,7 @@ public class Menu{
     public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
 
     public Rectangle conwayButton = new Rectangle(240, 495, 60, 25);
+    public Rectangle gravWellButton = new Rectangle(240, 525, 60, 25);
 
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
@@ -65,6 +66,8 @@ public class Menu{
         g2d.draw(gpButton);
         g.drawString("Conway",  conwayButton.x+6, conwayButton.y+18);
         g2d.draw(conwayButton);
+        g.drawString("GravWell",  gravWellButton.x+3, gravWellButton.y+18);
+        g2d.draw(gravWellButton);
     }
 
 

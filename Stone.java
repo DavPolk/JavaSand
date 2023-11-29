@@ -7,5 +7,6 @@ public class Stone extends Solid {
         c = new Color(150, 150, 150);
         rgb = c.getRGB();
         element = Element.STONE;
+        density = 999;
     }
 }

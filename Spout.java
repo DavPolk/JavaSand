@@ -26,6 +26,7 @@ public class Spout extends Solid{
 
         if(currentElement == Element.FIRE){
             g.spawnElement(getX(), getY()+1, currentElement);
+            g.spawnElement(getX(), getY()-1, currentElement);
         }
         else if(currentElement == Element.CONWAY){
             if(getX() != 0 && getX() < g.gridSizeX && getY() != 0 && getY() < g.gridSizeY){

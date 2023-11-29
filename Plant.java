@@ -6,7 +6,7 @@ public class Plant extends Solid {
 
     public Plant(int x, int y) {
         super(x, y);
-        c = new Color(10, 200, 10);
+        c = new Color(10, 140, 10);
         rgb = c.getRGB();
         flammability = 4;
     }

@@ -82,6 +82,8 @@ public class Grid {
             particleGrid[x][y] = new Conway(x, y);
         if(e == Element.EMPTY)
             particleGrid[x][y] = new Particle(x, y);
+        if(e == Element.GRAVWELL)
+            particleGrid[x][y] = new GravWell(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){
@@ -127,6 +129,18 @@ public class Grid {
                 result.add(neighbors.get(i));
             }
         }
+        return result;
+    }
+
+    public int[] getVector(int x1, int y1, int x2, int y2){
+        int deltaX = x1-x2;
+        int deltaY = y1-y2;
+        int[] v = {deltaX, deltaY};
+        return v;
+    }
+
+    public double distFromTo(int x1, int y1, int x2, int y2){
+        double result = Math.sqrt((x1-x2)^2 + (y1-y2)^2);
         return result;
     }
 }

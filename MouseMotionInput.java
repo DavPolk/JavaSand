@@ -59,9 +59,17 @@ public class MouseMotionInput extends MouseAdapter{
         // public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
 
         // public Rectangle conwayButton = new Rectangle(240, 495, 60, 25);
+        // public Rectangle gravWellButton = new Rectangle(240, 525, 60, 25);
 
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
+
+        //Conway game of life button
+        if (mx >= 240 && mx <= 300){
+            if (my >= 525 && my <= 550){
+                game.selectedElement = Element.GRAVWELL;
+            }
+        }
 
         //Conway game of life button
         if (mx >= 240 && mx <= 300){

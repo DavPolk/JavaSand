@@ -16,7 +16,12 @@ public class Fluid extends Particle{
     
     @Override
     public void update(Grid g){
-        fluidUpdate(g, maxFlow, nudgePercentage);
+        if(!ignoreNextGravity){
+            fluidUpdate(g, maxFlow, nudgePercentage);
+        }
+        else{
+            ignoreNextGravity = false;
+        }
     }
     
 
