@@ -2,7 +2,7 @@
 JC = javac
 
 #Rule to build the classes
-default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseMotionInput.class Sand.class Stone.class Plant.class Fire.class Gunpowder.class
+default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseMotionInput.class Sand.class Stone.class Plant.class Fire.class Gunpowder.class Conway.class
 
 #Rule to build main.class
 Main.class: Main.java
@@ -47,10 +47,17 @@ Fire.class: Fire.java
 Gunpowder.class: Gunpowder.java
 	$(JC) -g Gunpowder.java
 
+Conway.class: Conway.java
+	$(JC) -g Conway.java
+
 # Target to run main
 run: default
 	java GameCanvas
 
 # Remove class files
 clean:
-	rm -f *.class
+	rm -f *.class javaSand.jar
+
+jar: default
+	jar cfm javaSand.jar manifest.txt *.class
+	java -cp javaSand.jar GameCanvas

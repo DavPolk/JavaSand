@@ -44,6 +44,12 @@ public class MouseMotionInput extends MouseAdapter{
         int mx = e.getX();
         int my = e.getY();
 
+
+        // public Rectangle brushOne = new Rectangle(10, 495, 25, 25);
+        // public Rectangle brushTwo = new Rectangle(40, 495, 25, 25);
+        // public Rectangle brushFour = new Rectangle(10, 525, 25, 25);
+        // public Rectangle brushEight = new Rectangle(40, 525, 25, 25);
+
         // public Rectangle sandButton = new Rectangle(100, 495, 60, 25);
         // public Rectangle waterButton = new Rectangle(100, 525, 60, 25);
         // public Rectangle stoneButton = new Rectangle(100, 555, 60, 25);
@@ -52,8 +58,46 @@ public class MouseMotionInput extends MouseAdapter{
         // public Rectangle fireButton = new Rectangle(170, 525, 60, 25);
         // public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
 
+        // public Rectangle conwayButton = new Rectangle(240, 495, 60, 25);
+
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
+
+        //Conway game of life button
+        if (mx >= 240 && mx <= 300){
+            if (my >= 495 && my <= 530){
+                game.selectedElement = Element.CONWAY;
+            }
+        }
+
+
+        //8x brush toggle
+        if (mx >= 40 && mx <= 65){
+            if (my >= 525 && my <= 550){
+                game.brushSize = 8;
+            }
+        }
+
+        //4x brush toggle
+        if (mx >= 10 && mx <= 35){
+            if (my >= 525 && my <= 550){
+                game.brushSize = 4;
+            }
+        }
+
+        //2x brush toggle
+        if (mx >= 40 && mx <= 65){
+            if (my >= 495 && my <= 520){
+                game.brushSize = 2;
+            }
+        }
+
+        //1x brush toggle
+        if (mx >= 10 && mx <= 35){
+            if (my >= 495 && my <= 520){
+                game.brushSize = 1;
+            }
+        }
 
         //gunpowder button
         if (mx >= 170 && mx <= 230){

@@ -26,10 +26,15 @@ public class Particle {
         flammability = 0;
     }
 
-    //have to define this here so it can be overridden
-    //since grid is an array of particles, it can only call functions defined in Particle, child functions arent visible 
+
     public void update(Grid g){
-        //tryGravity(g, 1, 0);
+        //empty particles check for neighboring conway particles
+        //converts self to conway if exactly 3 are neighboring
+        ArrayList <int[]> neighboringConways = g.getNeighborsOfElement(getX(), getY(), Element.CONWAY);
+        if(neighboringConways.size() == 3){
+            int[] coords = {getX(), getY()};
+            g.conwaysToAdd.add(coords);
+        }
     }
 
     public void randomizeColor(){

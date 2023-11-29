@@ -114,6 +114,15 @@ public class GameCanvas extends Canvas implements Runnable{
                 grid.particleGrid[i][j].update(grid);
             }
         }
+        //System.out.println(grid.conwaysToAdd.size());
+        for(int i = 0; i < grid.conwaysToAdd.size(); i++){
+            grid.spawnElement(grid.conwaysToAdd.get(i)[0], grid.conwaysToAdd.get(i)[1], Element.CONWAY);
+        }
+        for(int i = 0; i < grid.conwaysToRemove.size(); i++){
+            grid.spawnElement(grid.conwaysToRemove.get(i)[0], grid.conwaysToRemove.get(i)[1], Element.EMPTY);
+        }
+        grid.conwaysToAdd.clear();
+        grid.conwaysToRemove.clear();
     }
 
     private void draw(){

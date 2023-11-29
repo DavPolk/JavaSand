@@ -8,6 +8,11 @@ public class Menu{
         game = g;
     }
 
+    public Rectangle brushOne = new Rectangle(10, 495, 25, 25);
+    public Rectangle brushTwo = new Rectangle(40, 495, 25, 25);
+    public Rectangle brushFour = new Rectangle(10, 525, 25, 25);
+    public Rectangle brushEight = new Rectangle(40, 525, 25, 25);
+
     public Rectangle sandButton = new Rectangle(100, 495, 60, 25);
     public Rectangle waterButton = new Rectangle(100, 525, 60, 25);
     public Rectangle stoneButton = new Rectangle(100, 555, 60, 25);
@@ -15,6 +20,8 @@ public class Menu{
     public Rectangle plantButton = new Rectangle(170, 495, 60, 25);
     public Rectangle fireButton = new Rectangle(170, 525, 60, 25);
     public Rectangle gpButton = new Rectangle(170, 555, 60, 25);
+
+    public Rectangle conwayButton = new Rectangle(240, 495, 60, 25);
 
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
@@ -30,6 +37,16 @@ public class Menu{
         if(game.selectedSpout)
             g.drawString("SPOUT OF", 10, 570);
 
+        g.drawString("1x", brushOne.x+4, brushOne.y+18);
+        g2d.draw(brushOne);
+        g.drawString("2x", brushTwo.x+4, brushTwo.y+18);
+        g2d.draw(brushTwo);
+        g.drawString("4x", brushFour.x+4, brushFour.y+18);
+        g2d.draw(brushFour);
+        g.drawString("8x", brushEight.x+4, brushEight.y+18);
+        g2d.draw(brushEight);
+        
+
         g.drawString("Sand", sandButton.x+12, sandButton.y+18);
         g2d.draw(sandButton);
         g.drawString("Water", waterButton.x+12, waterButton.y+18);
@@ -44,8 +61,10 @@ public class Menu{
         g2d.draw(plantButton);
         g.drawString("Fire",  fireButton.x+12, fireButton.y+18);
         g2d.draw(fireButton);
-        g.drawString("Gunpow",  gpButton.x+12, gpButton.y+18);
+        g.drawString("GunP",  gpButton.x+12, gpButton.y+18);
         g2d.draw(gpButton);
+        g.drawString("Conway",  conwayButton.x+6, conwayButton.y+18);
+        g2d.draw(conwayButton);
     }
 
 

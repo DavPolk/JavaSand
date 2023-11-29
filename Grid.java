@@ -5,6 +5,8 @@ public class Grid {
     public int gridSizeX = 240;
     public int gridSizeY = 160;
     Particle[][] particleGrid;
+    ArrayList<int[]> conwaysToAdd = new ArrayList<int[]>();
+    ArrayList<int[]> conwaysToRemove = new ArrayList<int[]>();
 
     Grid(){
         particleGrid = new Particle[gridSizeX][gridSizeY];
@@ -76,6 +78,10 @@ public class Grid {
             particleGrid[x][y] = new Fire(x, y);
         if(e == Element.GUNPOWDER)
             particleGrid[x][y] = new Gunpowder(x, y);
+        if(e == Element.CONWAY)
+            particleGrid[x][y] = new Conway(x, y);
+        if(e == Element.EMPTY)
+            particleGrid[x][y] = new Particle(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){
