@@ -128,7 +128,7 @@ public class Particle {
                     g.swap(getX(), getY(), getX()-1, getY());
                 }
                 else if(g.particleGrid[getX()-1][getY()].density < 999){
-                    g.particleGrid[getX()-1][getY()].velocity[0] -= this.velocity[0];
+                    g.particleGrid[getX()-1][getY()].velocity[0] += this.velocity[0];
                     this.velocity[0] = 0;
                 }
                 else{
@@ -362,6 +362,9 @@ public class Particle {
         beenGravRight = false;
         beenGravUp = false;
         beenGravDown = false;
+    }
+
+    public void updateExplosives(Grid g){
     }
 }
 

@@ -19,7 +19,7 @@ public class C4 extends Solid{
     }
 
     public void explode(Grid g){
-        for(int i = getX(); i < getX() + explosionRadius; i++){
+        for(int i = getX()+1; i < getX() + explosionRadius; i++){
             for(int j = getY()-4; j < getY() + explosionRadius; j++){
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
@@ -27,10 +27,6 @@ public class C4 extends Solid{
                             g.spawnElement(i, j, Element.FIRE);
                         }
                         if(g.particleGrid[i][j].density < 999){
-                            // if (i < getX()){
-                            //     System.out.println("trying to add velocity left");
-                            //     g.particleGrid[i][j].velocity[0] -= explosionStrength;
-                            // }
                             if (i > getX()){
                                 g.particleGrid[i][j].velocity[0] += explosionStrength;
                                 g.particleGrid[i][j].velocity[1] += 1;
@@ -41,7 +37,7 @@ public class C4 extends Solid{
             }
         }
 
-        for(int i = getX(); i > getX() - explosionRadius; i--){
+        for(int i = getX() - explosionRadius; i < getX(); i++){
             for(int j = getY(); j < getY() + explosionRadius; j++){
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
@@ -50,7 +46,7 @@ public class C4 extends Solid{
                         }
                         if(g.particleGrid[i][j].density < 999){
                             if (i < getX()){
-                            //     System.out.println("trying to add velocity left");
+                                //System.out.println("trying to add velocity left");
                                 g.particleGrid[i][j].velocity[0] -= explosionStrength;
                                 g.particleGrid[i][j].velocity[1] += 1;
                             }
