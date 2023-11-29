@@ -1,16 +1,15 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
-public class GravWell extends Solid{
+public class BlackHole extends GravWell {
 
-    public int gravRange = 50;
-    public int pullStrength = 80;
-
-    public GravWell(int x, int y) {
+    public BlackHole(int x, int y) {
         super(x, y);
-        c = new Color(255, 255, 255);
+        density = 1000;
+        c = new Color(0, 0, 0);
         rgb = c.getRGB();
     }
-
+    
 
     @Override
     public void update(Grid g){
@@ -22,7 +21,7 @@ public class GravWell extends Solid{
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
                         g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < 10){
+                        if(g.particleGrid[i][j].density < this.density){
                             if(!g.particleGrid[i][j].beenGravLeft){
                                 if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
                                     g.particleGrid[i][j].beenGravLeft = true;
@@ -47,7 +46,7 @@ public class GravWell extends Solid{
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
                         g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < 10){
+                        if(g.particleGrid[i][j].density < this.density){
                             if(!g.particleGrid[i][j].beenGravRight){
                                 if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
                                     g.particleGrid[i][j].beenGravRight = true;
@@ -72,7 +71,7 @@ public class GravWell extends Solid{
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if( j < g.gridSizeY-1){
                         g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < 10){
+                        if(g.particleGrid[i][j].density < this.density){
                             if(!g.particleGrid[i][j].beenGravRight){
                                 if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
                                     g.particleGrid[i][j].beenGravRight = true;
@@ -97,7 +96,7 @@ public class GravWell extends Solid{
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if(j < g.gridSizeY-1){
                         g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < 10){
+                        if(g.particleGrid[i][j].density < this.density){
                             if(!g.particleGrid[i][j].beenGravLeft){
                                 if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
                                     g.particleGrid[i][j].beenGravLeft = true;
@@ -114,67 +113,13 @@ public class GravWell extends Solid{
                     }
                 }
             }
-
         }
 
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* first attempt at gravwell update method
-
-        for(int i = 0; i < g.gridSizeX; i++){
-            for(int j = g.gridSizeY - 1; j > 0; j--){
-                if(!(i == getX() && j == getY())){
-                    int[] vect = g.getVector(getX(), getY(), i, j);
-
-                    if(Math.abs(vect[0]) > 1 && Math.abs(vect[1]) > 1){
-                        if(g.particleGrid[i][j].density < 10){
-                            double oddsToMoveX = 1 + Math.abs(vect[0]) / (1 + Math.abs((vect[0]) +Math.abs(vect[1])));
-                            if(Math.random() < oddsToMoveX ){
-                                if(Math.abs(vect[0]) <= gravRange && Math.abs(vect[0]) > 1){
-                                    if(vect[0] > 0){
-                                        if(g.particleGrid[i+1][j].density < g.particleGrid[i][j].density){
-                                            g.swap(i, j, i+1, j);
-                                        }
-                                    }
-                                    if(vect[0] < 0){
-                                        if(g.particleGrid[i-1][j].density < g.particleGrid[i][j].density){
-                                            g.swap(i, j, i-1, j);
-                                        }
-                                    }
-                                }
-                            }
-                            else{
-                                if(Math.abs(vect[1]) <= gravRange && Math.abs(vect[1]) > 2){
-                                    if(vect[1] > 0){
-                                        if(g.particleGrid[i][j+2].density < g.particleGrid[i][j].density){
-                                            g.swap(i, j, i, j+2);
-                                        }
-                                    }
-                                    if(vect[1] < 0){
-                                        if(g.particleGrid[i][j-1].density < g.particleGrid[i][j].density){
-                                            g.swap(i, j, i, j-1);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        ArrayList<int[]> neighbors = g.getNeighbors(getX(), getY());
+        for(int i = 0; i < neighbors.size(); i++){
+            if(g.particleGrid[neighbors.get(i)[0]][neighbors.get(i)[1]].density < this.density){
+                g.spawnElement(neighbors.get(i)[0], neighbors.get(i)[1], Element.EMPTY);
             }
-        }*/
+        }
     }
 }

@@ -25,11 +25,13 @@ public class MouseMotionInput extends MouseAdapter{
                 int gridX = (int) (mx / game.SCALE);
                 int gridY = (int) (topOfMenu - my) / game.SCALE;
 
-                if(game.selectedSpout){
-                    game.grid.paintSpout(gridX, gridY, game.selectedElement, game.brushSize);
-                }
-                else{
-                    game.grid.paintElement(gridX, gridY, game.selectedElement, game.brushSize);
+                if(gridX < game.grid.gridSizeX-1 && gridY < game.grid.gridSizeY-1){
+                    if(game.selectedSpout){
+                        game.grid.paintSpout(gridX, gridY, game.selectedElement, game.brushSize);
+                    }
+                    else{
+                        game.grid.paintElement(gridX, gridY, game.selectedElement, game.brushSize);
+                    }
                 }
             }
         }
@@ -60,11 +62,19 @@ public class MouseMotionInput extends MouseAdapter{
 
         // public Rectangle conwayButton = new Rectangle(240, 495, 60, 25);
         // public Rectangle gravWellButton = new Rectangle(240, 525, 60, 25);
+        // public Rectangle blackHoleButton = new Rectangle(240, 555, 60, 25);
 
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
 
-        //Conway game of life button
+        //black hole button
+        if (mx >= 240 && mx <= 300){
+            if (my >= 555 && my <= 575){
+                game.selectedElement = Element.BLACKHOLE;
+            }
+        }
+
+        //Gravwell button
         if (mx >= 240 && mx <= 300){
             if (my >= 525 && my <= 550){
                 game.selectedElement = Element.GRAVWELL;

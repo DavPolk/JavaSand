@@ -23,7 +23,7 @@ public class Particle {
     public Particle(int x, int y){
         gridX = x;
         gridY = y;
-        c = new Color(30, 30, 30);
+        c = new Color(40, 40, 40);
         isEmpty = true;
         rgb = c.getRGB();
         density = 0.0;

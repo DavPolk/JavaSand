@@ -84,6 +84,8 @@ public class Grid {
             particleGrid[x][y] = new Particle(x, y);
         if(e == Element.GRAVWELL)
             particleGrid[x][y] = new GravWell(x, y);
+        if(e == Element.BLACKHOLE)
+            particleGrid[x][y] = new BlackHole(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){
