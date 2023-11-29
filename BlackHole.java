@@ -13,27 +13,23 @@ public class BlackHole extends GravWell {
 
     @Override
     public void update(Grid g){
-
-
         //pull particles in the lower left
         for(int i = getX() - gravRange; i < getX(); i++){
             if(i > 0){
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < this.density){
-                            if(!g.particleGrid[i][j].beenGravLeft){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
-                                    g.particleGrid[i][j].beenGravLeft = true;
-                                    g.swap(i, j, i+1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravUp){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j+1].density){
-                                    g.particleGrid[i][j].beenGravUp = true;
-                                    g.swap(i, j, i, j+1);
-                                }
-                            }
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
+                        if(g.particleGrid[i][j].density < 10){
+                            // if(!g.particleGrid[i][j].beenGravLeft){
+                            //     if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
+                            //         g.particleGrid[i][j].beenGravLeft = true;
+                            //         g.swap(i, j, i+1, j);
+                            //     }
+                            // }
+                            if(g.particleGrid[i][j].velocity[0] < 2)
+                                g.particleGrid[i][j].velocity[0] += 1;
+                            if(g.particleGrid[i][j].velocity[1] < 2)
+                                g.particleGrid[i][j].velocity[1] += 1;
                         }
                     }
                 }
@@ -45,20 +41,12 @@ public class BlackHole extends GravWell {
             if (i < g.gridSizeX-1){
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < this.density){
-                            if(!g.particleGrid[i][j].beenGravRight){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
-                                    g.particleGrid[i][j].beenGravRight = true;
-                                    g.swap(i, j, i-1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravUp){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j+1].density){
-                                    g.particleGrid[i][j].beenGravUp = true;
-                                    g.swap(i, j, i, j+1);
-                                }
-                            }
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
+                        if(g.particleGrid[i][j].density < 10){
+                            if(g.particleGrid[i][j].velocity[0] > -2)
+                                g.particleGrid[i][j].velocity[0] -= 1;
+                            if(g.particleGrid[i][j].velocity[1] < 2)
+                                g.particleGrid[i][j].velocity[1] += 1;
                         }
                     }
                 }
@@ -70,20 +58,12 @@ public class BlackHole extends GravWell {
             if(i < g.gridSizeX-1){
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if( j < g.gridSizeY-1){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < this.density){
-                            if(!g.particleGrid[i][j].beenGravRight){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
-                                    g.particleGrid[i][j].beenGravRight = true;
-                                    g.swap(i, j, i-1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravDown){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j-1].density){
-                                    g.particleGrid[i][j].beenGravDown = true;
-                                    g.swap(i, j, i, j-1);
-                                }
-                            }
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
+                        if(g.particleGrid[i][j].density < 10){
+                            if(g.particleGrid[i][j].velocity[0] > -2)
+                                g.particleGrid[i][j].velocity[0] -= 1;
+                            if(g.particleGrid[i][j].velocity[1] > -2)
+                                g.particleGrid[i][j].velocity[1] -= 1;
                         }
                     }
                 }
@@ -95,26 +75,20 @@ public class BlackHole extends GravWell {
             if(i > 0){
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if(j < g.gridSizeY-1){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
-                        if(g.particleGrid[i][j].density < this.density){
-                            if(!g.particleGrid[i][j].beenGravLeft){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
-                                    g.particleGrid[i][j].beenGravLeft = true;
-                                    g.swap(i, j, i+1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravDown){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j-1].density){
-                                    g.particleGrid[i][j].beenGravDown = true;
-                                    g.swap(i, j, i, j-1);
-                                }
-                            }
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
+                        if(g.particleGrid[i][j].density < 10){
+                            if(g.particleGrid[i][j].velocity[0] < 2)
+                                g.particleGrid[i][j].velocity[0] += 1;
+                            if(g.particleGrid[i][j].velocity[1] > -2)
+                                g.particleGrid[i][j].velocity[1] -= 1;
                         }
                     }
                 }
             }
         }
 
+        
+        //delete particles touching black holes
         ArrayList<int[]> neighbors = g.getNeighbors(getX(), getY());
         for(int i = 0; i < neighbors.size(); i++){
             if(g.particleGrid[neighbors.get(i)[0]][neighbors.get(i)[1]].density < this.density){

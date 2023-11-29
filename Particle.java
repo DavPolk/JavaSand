@@ -78,7 +78,7 @@ public class Particle {
 
     public void tryVelocityUp(Grid g){
         if(velocity[1] > 0){
-            ignoreNextGravity = true;
+            this.ignoreNextGravity = true;
             if(getY() < g.gridSizeY - 1){
                 if(g.particleGrid[getX()][getY()+1].density < this.density){
                     g.swap(getX(), getY(), getX(), getY()+1);
@@ -98,6 +98,30 @@ public class Particle {
                 velocity[1] -= 1;
         }
     }
+
+    public void tryVelocityDown(Grid g){
+        if(velocity[1] < 0){
+            this.ignoreNextGravity = true;
+            if(getY() > 0){
+                if(g.particleGrid[getX()][getY()-1].density < this.density){
+                    g.swap(getX(), getY(), getX(), getY()-1);
+                }
+                else if(g.particleGrid[getX()][getY()-1].density < 999){
+                    g.particleGrid[getX()][getY()-1].velocity[1] += this.velocity[1];
+                    this.velocity[1] = 0;
+                }
+                else{
+                    this.velocity[1] = 0;
+                }
+            }
+            else{
+                this.velocity[1] = 0;
+            }
+            if(this.velocity[1] < 0)
+                velocity[1] += 1;
+        }
+    }
+    
 
     public void tryVelocityRight(Grid g){
         if(velocity[0] > 0){

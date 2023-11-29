@@ -21,20 +21,18 @@ public class GravWell extends Solid{
             if(i > 0){
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
                         if(g.particleGrid[i][j].density < 10){
-                            if(!g.particleGrid[i][j].beenGravLeft){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
-                                    g.particleGrid[i][j].beenGravLeft = true;
-                                    g.swap(i, j, i+1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravUp){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j+1].density){
-                                    g.particleGrid[i][j].beenGravUp = true;
-                                    g.swap(i, j, i, j+1);
-                                }
-                            }
+                            // if(!g.particleGrid[i][j].beenGravLeft){
+                            //     if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
+                            //         g.particleGrid[i][j].beenGravLeft = true;
+                            //         g.swap(i, j, i+1, j);
+                            //     }
+                            // }
+                            if(g.particleGrid[i][j].velocity[0] < 2)
+                                g.particleGrid[i][j].velocity[0] += 1;
+                            if(g.particleGrid[i][j].velocity[1] < 2)
+                                g.particleGrid[i][j].velocity[1] += 1;
                         }
                     }
                 }
@@ -46,20 +44,12 @@ public class GravWell extends Solid{
             if (i < g.gridSizeX-1){
                 for(int j = getY() - gravRange; j < getY(); j++){
                     if(j > 0){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
                         if(g.particleGrid[i][j].density < 10){
-                            if(!g.particleGrid[i][j].beenGravRight){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
-                                    g.particleGrid[i][j].beenGravRight = true;
-                                    g.swap(i, j, i-1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravUp){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j+1].density){
-                                    g.particleGrid[i][j].beenGravUp = true;
-                                    g.swap(i, j, i, j+1);
-                                }
-                            }
+                            if(g.particleGrid[i][j].velocity[0] > -2)
+                                g.particleGrid[i][j].velocity[0] -= 1;
+                            if(g.particleGrid[i][j].velocity[1] < 2)
+                                g.particleGrid[i][j].velocity[1] += 1;
                         }
                     }
                 }
@@ -71,20 +61,12 @@ public class GravWell extends Solid{
             if(i < g.gridSizeX-1){
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if( j < g.gridSizeY-1){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
                         if(g.particleGrid[i][j].density < 10){
-                            if(!g.particleGrid[i][j].beenGravRight){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i-1][j].density){
-                                    g.particleGrid[i][j].beenGravRight = true;
-                                    g.swap(i, j, i-1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravDown){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j-1].density){
-                                    g.particleGrid[i][j].beenGravDown = true;
-                                    g.swap(i, j, i, j-1);
-                                }
-                            }
+                            if(g.particleGrid[i][j].velocity[0] > -2)
+                                g.particleGrid[i][j].velocity[0] -= 1;
+                            if(g.particleGrid[i][j].velocity[1] > -2)
+                                g.particleGrid[i][j].velocity[1] -= 1;
                         }
                     }
                 }
@@ -96,25 +78,16 @@ public class GravWell extends Solid{
             if(i > 0){
                 for(int j = getY() + gravRange; j > getY(); j--){
                     if(j < g.gridSizeY-1){
-                        g.particleGrid[i][j].ignoreNextGravity = true;
+                        //g.particleGrid[i][j].ignoreNextGravity = true;
                         if(g.particleGrid[i][j].density < 10){
-                            if(!g.particleGrid[i][j].beenGravLeft){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i+1][j].density){
-                                    g.particleGrid[i][j].beenGravLeft = true;
-                                    g.swap(i, j, i+1, j);
-                                }
-                            }
-                            if(!g.particleGrid[i][j].beenGravDown){
-                                if(g.particleGrid[i][j].density > g.particleGrid[i][j-1].density){
-                                    g.particleGrid[i][j].beenGravDown = true;
-                                    g.swap(i, j, i, j-1);
-                                }
-                            }
+                            if(g.particleGrid[i][j].velocity[0] < 2)
+                                g.particleGrid[i][j].velocity[0] += 1;
+                            if(g.particleGrid[i][j].velocity[1] > -2)
+                                g.particleGrid[i][j].velocity[1] -= 1;
                         }
                     }
                 }
             }
-
         }
 
 
