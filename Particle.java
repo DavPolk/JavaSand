@@ -16,6 +16,8 @@ public class Particle {
     public boolean beenGravRight = false;
     public boolean beenGravUp = false;
     public boolean beenGravDown = false;
+    public boolean hasMovedX = false;
+    public int[] velocity = {0, 0};
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -74,7 +76,72 @@ public class Particle {
         g.particleGrid[getX()][getY()] = new Particle(getX(), getY());
     }
 
+    public void tryVelocityUp(Grid g){
+        if(velocity[1] > 0){
+            ignoreNextGravity = true;
+            if(getY() < g.gridSizeY - 1){
+                if(g.particleGrid[getX()][getY()+1].density < this.density){
+                    g.swap(getX(), getY(), getX(), getY()+1);
+                }
+                else if(g.particleGrid[getX()][getY()+1].density < 999){
+                    g.particleGrid[getX()][getY()+1].velocity[1] += this.velocity[1];
+                    this.velocity[1] = 0;
+                }
+                else{
+                    this.velocity[1] = 0;
+                }
+            }
+            else{
+                this.velocity[1] = 0;
+            }
+            if(this.velocity[1] > 0)
+                velocity[1] -= 1;
+        }
+    }
 
+    public void tryVelocityRight(Grid g){
+        if(velocity[0] > 0){
+            if(getX() < g.gridSizeX-1){
+                if(g.particleGrid[getX()+1][getY()].density < this.density){
+                    g.swap(getX(), getY(), getX()+1, getY());
+                }
+                else if(g.particleGrid[getX()+1][getY()].density < 999){
+                    g.particleGrid[getX()+1][getY()].velocity[0] += this.velocity[0];
+                    this.velocity[0] = 0;
+                }
+                else{
+                    this.velocity[0] = 0;
+                }
+            }
+            else{
+                this.velocity[0] = 0;
+            }
+            if(velocity[0] > 0)
+                velocity[0] -= 1;
+        }
+    }
+
+    public void tryVelocityLeft(Grid g){
+         if (velocity[0] < 0){
+            if(getX() > 0){
+                if(g.particleGrid[getX()-1][getY()].density < this.density){
+                    g.swap(getX(), getY(), getX()-1, getY());
+                }
+                else if(g.particleGrid[getX()-1][getY()].density < 999){
+                    g.particleGrid[getX()-1][getY()].velocity[0] -= this.velocity[0];
+                    this.velocity[0] = 0;
+                }
+                else{
+                    this.velocity[0] = 0;
+                }
+            }
+            else{
+                this.velocity[0] = 0;
+            }
+            if(velocity[0] < 0)
+                velocity[0] += 1;
+        }
+    }
 
     //Gravity
     //tries to move the particle one cell down. If it fails, or is nudged, tries down-left and down-right in random order.

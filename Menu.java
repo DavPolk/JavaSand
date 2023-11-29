@@ -25,6 +25,8 @@ public class Menu{
     public Rectangle gravWellButton = new Rectangle(240, 525, 60, 25);
     public Rectangle blackHoleButton = new Rectangle(240, 555, 60, 25);
 
+    public Rectangle c4Button = new Rectangle(310, 495, 60, 25);
+
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
 
@@ -71,6 +73,8 @@ public class Menu{
         g2d.draw(gravWellButton);
         g.drawString("BH",  blackHoleButton.x+15, blackHoleButton.y+18);
         g2d.draw(blackHoleButton);
+        g.drawString("C4",  c4Button.x+15, c4Button.y+18);
+        g2d.draw(c4Button);
     }
 
 

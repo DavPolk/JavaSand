@@ -2,7 +2,7 @@
 JC = javac
 
 #Rule to build the classes
-default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseMotionInput.class Sand.class Stone.class Plant.class Fire.class Gunpowder.class Conway.class GravWell.class BlackHole.class
+default: Grid.class Particle.class GameCanvas.class Particulate.class Fluid.class Spout.class Menu.class MouseMotionInput.class Sand.class Stone.class Plant.class Fire.class Gunpowder.class Conway.class GravWell.class BlackHole.class C4.class
 
 #Rule to build main.class
 Main.class: Main.java
@@ -55,6 +55,9 @@ GravWell.class: GravWell.java
 
 BlackHole.class: BlackHole.java
 	$(JC) -g BlackHole.java
+
+C4.class: C4.java
+	$(JC) -g C4.java
 
 # Target to run main
 run: default

@@ -64,8 +64,17 @@ public class MouseMotionInput extends MouseAdapter{
         // public Rectangle gravWellButton = new Rectangle(240, 525, 60, 25);
         // public Rectangle blackHoleButton = new Rectangle(240, 555, 60, 25);
 
+        // public Rectangle c4Button = new Rectangle(310, 495, 60, 25);
+
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
+
+        //c4 button
+        if (mx >= 310 && mx <= 370){
+            if (my >= 495 && my <= 520){
+                game.selectedElement = Element.C4;
+            }
+        }
 
         //black hole button
         if (mx >= 240 && mx <= 300){

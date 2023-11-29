@@ -12,6 +12,7 @@ public class Fire extends Solid{
         rgb = c.getRGB();
         health = 10;
         density = 0.4;
+        element = Element.FIRE;
     }
 
 

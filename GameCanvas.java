@@ -112,9 +112,21 @@ public class GameCanvas extends Canvas implements Runnable{
         for(int i = 0; i < grid.gridSizeX; i++){
             for(int j = 0; j < grid.gridSizeY; j++){
                 grid.particleGrid[i][j].update(grid);
+                grid.particleGrid[i][j].tryVelocityLeft(grid);
                 grid.particleGrid[i][j].resetGravMarkers();
             }
         }
+        for(int i = grid.gridSizeX-1; i > 0; i--){
+            for(int j = grid.gridSizeY-1; j > 0; j--){
+                grid.particleGrid[i][j].tryVelocityUp(grid);
+            }
+        }
+        for(int i = grid.gridSizeX-1; i > 0; i--){
+            for(int j = grid.gridSizeY-1; j > 0; j--){
+                grid.particleGrid[i][j].tryVelocityRight(grid);
+            }
+        }
+        
 
 
         //handle conway updates
