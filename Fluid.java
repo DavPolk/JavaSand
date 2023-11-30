@@ -7,10 +7,11 @@ public class Fluid extends Particle{
 
     public Fluid(int x, int y){
         super(x, y);
-        c = new Color(20, 230, 20);
+        c = new Color(20, 10, 250);
         isEmpty = false;
         rgb = c.getRGB();
         density = 1.5;
+        baseColor = c;
     }
 
     

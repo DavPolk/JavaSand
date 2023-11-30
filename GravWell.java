@@ -9,6 +9,7 @@ public class GravWell extends Solid{
         super(x, y);
         c = new Color(255, 255, 255);
         rgb = c.getRGB();
+        baseColor = c;
     }
 
 

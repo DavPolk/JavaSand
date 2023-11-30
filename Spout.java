@@ -17,6 +17,8 @@ public class Spout extends Solid{
         rgb = c.getRGB();
         density = 999;
         currentElement = e;
+        baseColor = c;
+        invincible = true;
     }
 
     public int spawnPercent = 20;

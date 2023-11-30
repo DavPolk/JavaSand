@@ -143,8 +143,9 @@ public class Grid {
         return v;
     }
 
-    public double distFromTo(int x1, int y1, int x2, int y2){
-        double result = Math.sqrt((x1-x2)^2 + (y1-y2)^2);
+    //distance between two cells
+    public double distBetween(int x1, int y1, int x2, int y2){
+        double result = Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1), 2));
         return result;
     }
 }

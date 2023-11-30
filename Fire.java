@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class Fire extends Solid{
 
-    public int health;
+    public int douseChance = 10; //% chance to be deleted per adjacent water
 
     public Fire(int x, int y) {
         super(x, y);
@@ -13,20 +13,21 @@ public class Fire extends Solid{
         health = 10;
         density = 0.4;
         element = Element.FIRE;
+        baseColor = c;
+    }
+
+    @Override
+    public void updateColor(){
+        c = new Color(150+10*health, 20+10*health, 40+health);
+        rgb = c.getRGB();
     }
 
 
     @Override
     public void update(Grid g){
 
-        if(Math.random()*10 < 2){
-            health--;
-            if(health <= 0){
-                this.replaceWithEmpty(g);
-                return;
-            }
-            c = new Color(150+10*health, 20+10*health, 40+health);
-            rgb = c.getRGB();
+        if(Math.random()*10 < 4){
+            health-= 1;
         }
 
         if(Math.random()*20 < 1){
@@ -46,6 +47,11 @@ public class Fire extends Solid{
         for(int i = 0; i < neighbors.size(); i++){
             if(Math.random()*100 < g.particleGrid[neighbors.get(i)[0]][neighbors.get(i)[1]].flammability){
                 g.spawnElement(neighbors.get(i)[0], neighbors.get(i)[1], Element.FIRE);
+            }
+            if(Math.random()*100 < douseChance){
+                if(g.particleGrid[neighbors.get(i)[0]][neighbors.get(i)[1]].element == Element.WATER){
+                    this.replaceWithEmpty(g);
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ public class BlackHole extends GravWell {
         density = 1000;
         c = new Color(0, 0, 0);
         rgb = c.getRGB();
+        baseColor = c;
     }
     
 

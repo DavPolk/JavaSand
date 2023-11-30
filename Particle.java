@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Particle {
 
+    public Color baseColor;
     public Color c;
     public int rgb;
     private int gridX;
@@ -18,6 +19,9 @@ public class Particle {
     public boolean beenGravDown = false;
     public boolean hasMovedX = false;
     public int[] velocity = {0, 0};
+    public int maxHealth = 100;
+    public int health = 100;
+    public boolean invincible = false;
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -26,13 +30,13 @@ public class Particle {
         gridX = x;
         gridY = y;
         c = new Color(40, 40, 40);
+        baseColor = c;
         isEmpty = true;
         rgb = c.getRGB();
         density = 0.0;
         element = Element.EMPTY;
         flammability = 0;
     }
-
 
     public void update(Grid g){
         //empty particles check for neighboring conway particles
@@ -388,28 +392,28 @@ public class Particle {
         beenGravDown = false;
     }
 
-    public void updateExplosives(Grid g){
+    public void damage(int d){
+        if(!invincible){
+            health -= d;
+        }
+    }
+
+    public void checkDead(Grid g){
+        if(health <= 0)
+            replaceWithEmpty(g);
+    }
+
+    public void updateColor(){
+        int br = baseColor.getRed();
+        int bg = baseColor.getGreen();
+        int bb = baseColor.getBlue();
+
+        int r = Math.round((br/2)+(br*health/maxHealth/2));
+        int g = Math.round((bg/2)+(bg*health/maxHealth/2));
+        int b = Math.round((bb/2)+(bb*health/maxHealth/2));
+
+        c = new Color(r, g, b);
+        rgb = c.getRGB();
     }
 }
-
-
-
-
-        /* V1 gravity
-
-        if(getY() == 0){
-            //sit on bottom for now, maybe delete particle later
-        }
-        //try immediately below
-        else if(g.particleGrid[getX()][getY()-1].isEmpty == true){
-            g.swap(getX(), getY(), getX(), getY()-1);
-        }
-        //then to the sides
-        else if((getX() > 0) && (g.particleGrid[getX()-1][getY()-1].isEmpty == true)){
-            g.swap(getX(), getY(), getX()-1, getY()-1);
-        }
-        else if((getX() < 99) && (g.particleGrid[getX()+1][getY()-1].isEmpty == true)){
-            g.swap(getX(), getY(), getX()+1, getY()-1);
-        }
-        */
         

@@ -9,5 +9,6 @@ public class Sand extends Particulate{
         rgb = c.getRGB();
         density = 2.0;
         element = Element.SAND;
+        baseColor = c;
     }
 }

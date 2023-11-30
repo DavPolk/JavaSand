@@ -8,5 +8,6 @@ public class Gunpowder extends Particulate{
         c = new Color(122, 110, 104);
         rgb = c.getRGB();
         density = 2.5;
+        baseColor = c;
     }
 }

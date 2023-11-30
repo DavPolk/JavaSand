@@ -8,5 +8,8 @@ public class Stone extends Solid {
         rgb = c.getRGB();
         element = Element.STONE;
         density = 999;
+        baseColor = c;
+        maxHealth = 100;
+        health = maxHealth;
     }
 }

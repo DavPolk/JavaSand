@@ -9,6 +9,7 @@ public class Conway extends Solid{
         rgb = c.getRGB();
         density = 0.8;
         element = Element.CONWAY;
+        baseColor = c;
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Plant extends Solid {
         c = new Color(10, 140, 10);
         rgb = c.getRGB();
         flammability = 4;
+        baseColor = c;
     }
 
     @Override
