@@ -392,10 +392,12 @@ public class Particle {
         beenGravDown = false;
     }
 
-    public void damage(int d){
+    public void damage(int d, Grid g){
         if(!invincible){
             health -= d;
         }
+        checkDead(g);
+        updateColor();
     }
 
     public void checkDead(Grid g){

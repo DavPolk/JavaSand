@@ -114,8 +114,6 @@ public class GameCanvas extends Canvas implements Runnable{
             for(int j = 0; j < grid.gridSizeY; j++){
                 grid.particleGrid[i][j].update(grid);
                 grid.particleGrid[i][j].resetGravMarkers();
-                grid.particleGrid[i][j].checkDead(grid);
-                grid.particleGrid[i][j].updateColor();
             }
         }
 

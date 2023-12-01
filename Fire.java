@@ -14,6 +14,7 @@ public class Fire extends Solid{
         density = 0.4;
         element = Element.FIRE;
         baseColor = c;
+        invincible = true;
     }
 
     @Override
@@ -25,6 +26,9 @@ public class Fire extends Solid{
 
     @Override
     public void update(Grid g){
+
+        checkDead(g);
+        updateColor();
 
         if(Math.random()*10 < 4){
             health-= 1;

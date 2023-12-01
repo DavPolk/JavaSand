@@ -36,7 +36,7 @@ public class C4 extends Solid{
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
-                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)));
+                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)), g);
                                 }
                             }
                             if(g.particleGrid[i][j].density < 999){
@@ -62,7 +62,7 @@ public class C4 extends Solid{
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
-                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)));
+                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)), g);
                                 }
                             }
                             if(g.particleGrid[i][j].density < 999){
@@ -89,7 +89,7 @@ public class C4 extends Solid{
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
-                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)));
+                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)), g);
                                 }
                             }
                             if(g.particleGrid[i][j].density < 999){
@@ -115,7 +115,7 @@ public class C4 extends Solid{
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
-                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)));
+                                    g.particleGrid[i][j].damage((int) (explosionMaxDmg*(g.distBetween(getX(), getY(), i, j) / explosionRadius)), g);
                                 }
                             }
                             if(g.particleGrid[i][j].density < 999){
