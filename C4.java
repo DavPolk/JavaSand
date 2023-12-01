@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class C4 extends Solid{
 
-    public int explosionRadius = 30;
-    public int explosionStrength = 2;
-    public int explosionMaxDmg = 20;
+    public int explosionRadius = 30; 
+    public int explosionStrength = 1;
+    public int explosionMaxDmg = 5;
 
     public C4(int x, int y) {
         super(x, y);
@@ -31,8 +31,10 @@ public class C4 extends Solid{
                     if(i > 0 && i < g.gridSizeX - 1){
                         if(j > 0 && j < g.gridSizeY - 1){
                             if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
+                            if(Math.random() * 100 < 5){
                             if(g.particleGrid[i][j].isEmpty){
                                 g.spawnElement(i, j, Element.FIRE);
+                            }
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
@@ -42,7 +44,7 @@ public class C4 extends Solid{
                             if(g.particleGrid[i][j].density < 999){
                                 if (i > getX()){
                                     g.particleGrid[i][j].velocity[0] += explosionStrength;
-                                    g.particleGrid[i][j].velocity[1] += 1;
+                                    g.particleGrid[i][j].velocity[1] += explosionStrength;
                                 }
                             }
                         }
@@ -57,8 +59,10 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
+                            if(Math.random() * 100 < 5){
                             if(g.particleGrid[i][j].isEmpty){
                                 g.spawnElement(i, j, Element.FIRE);
+                            }
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
@@ -69,7 +73,7 @@ public class C4 extends Solid{
                                 if (i < getX()){
                                     //System.out.println("trying to add velocity left");
                                     g.particleGrid[i][j].velocity[0] -= explosionStrength;
-                                    g.particleGrid[i][j].velocity[1] += 1;
+                                    g.particleGrid[i][j].velocity[1] += explosionStrength;
                                 }
                             }
                         }
@@ -84,8 +88,10 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
+                            if(Math.random() * 100 < 5){
                             if(g.particleGrid[i][j].isEmpty){
                                 g.spawnElement(i, j, Element.FIRE);
+                            }
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
@@ -110,8 +116,10 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
+                            if(Math.random() * 100 < 5){
                             if(g.particleGrid[i][j].isEmpty){
                                 g.spawnElement(i, j, Element.FIRE);
+                            }
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){

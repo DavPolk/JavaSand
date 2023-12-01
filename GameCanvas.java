@@ -110,41 +110,46 @@ public class GameCanvas extends Canvas implements Runnable{
 
     private void tick(){
 
+        //grid.nextGrid = grid.particleGrid;
+
         for(int i = 0; i < grid.gridSizeX; i++){
             for(int j = 0; j < grid.gridSizeY; j++){
                 grid.particleGrid[i][j].update(grid);
-                grid.particleGrid[i][j].resetGravMarkers();
+                grid.particleGrid[i][j].hasMoved = false;
             }
         }
 
         for(int i = grid.gridSizeX-1; i > 0; i--){
             for(int j = grid.gridSizeY-1; j > 0; j--){
-                grid.particleGrid[i][j].tryVelocityRight(grid);
+                grid.particleGrid[i][j].doVeloRightUp(grid);
             }
         }
 
         for(int i = 0; i < grid.gridSizeX; i++){
-            for(int j = 0; j < grid.gridSizeY; j++){
-                grid.particleGrid[i][j].tryVelocityLeft(grid);
+            for(int j = grid.gridSizeY-1; j > 0; j--){
+                grid.particleGrid[i][j].doVeloLeftUp(grid);
             }
         }
 
         for(int i = grid.gridSizeX-1; i > 0; i--){
-            for(int j = grid.gridSizeY-1; j > 0; j--){
-                grid.particleGrid[i][j].tryVelocityUp(grid);
-                //grid.particleGrid[i][j].tryVelocityUp(grid);
+            for(int j = 0; j < grid.gridSizeY; j++){
+                grid.particleGrid[i][j].doVeloRightDown(grid);
             }
         }
 
         for(int i = 0; i < grid.gridSizeX; i++){
             for(int j = 0; j < grid.gridSizeY; j++){
-                grid.particleGrid[i][j].tryVelocityDown(grid);
+                grid.particleGrid[i][j].doVeloLeftDown(grid);
             }
         }
-        
-        
-        
 
+        // for(int i = 0; i < grid.gridSizeX; i++){
+        //     for(int j = 0; j < grid.gridSizeY; j++){
+        //         grid.particleGrid[i][j].tryVelocity(grid);
+        //     }
+        // }
+
+        //grid.particleGrid = grid.nextGrid;
 
         //handle conway updates
         //have to do this all at once instead of in individual particle updates or everything goes sideways

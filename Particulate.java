@@ -11,6 +11,8 @@ public class Particulate extends Particle{
         isEmpty = false;
         rgb = c.getRGB();
         density = 2.0;
+        int[] startVelo = {0,0};
+        velocity = startVelo;
     }
 
     @Override

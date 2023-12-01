@@ -17,11 +17,13 @@ public class Particle {
     public boolean beenGravRight = false;
     public boolean beenGravUp = false;
     public boolean beenGravDown = false;
-    public boolean hasMovedX = false;
+    public boolean hasMoved = false;
     public int[] velocity = {0, 0};
     public int maxHealth = 100;
     public int health = 100;
     public boolean invincible = false;
+    public int friction = 100; //percent chance to lose velocity in x and y direction each tick
+    public int maxSpeed = 10; //maximum velocity allowed on a particle
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -98,8 +100,6 @@ public class Particle {
             else{
                 this.velocity[1] = 0;
             }
-            if(this.velocity[1] > 0)
-                velocity[1] -= 1;
         }
     }
 
@@ -111,8 +111,8 @@ public class Particle {
                     g.swap(getX(), getY(), getX(), getY()-1);
                 }
                 else if(g.particleGrid[getX()][getY()-1].density < 999){
-                    g.particleGrid[getX()][getY()-1].velocity[1] += this.velocity[1];
-                    this.velocity[1] = 0;
+                        g.particleGrid[getX()][getY()-1].velocity[1] += this.velocity[1];
+                        this.velocity[1] = 0;
                 }
                 else{
                     this.velocity[1] = 0;
@@ -121,8 +121,6 @@ public class Particle {
             else{
                 this.velocity[1] = 0;
             }
-            if(this.velocity[1] < 0)
-                velocity[1] += 1;
         }
     }
     
@@ -144,8 +142,6 @@ public class Particle {
             else{
                 this.velocity[0] = 0;
             }
-            if(velocity[0] > 0)
-                velocity[0] -= 1;
         }
     }
 
@@ -156,8 +152,8 @@ public class Particle {
                     g.swap(getX(), getY(), getX()-1, getY());
                 }
                 else if(g.particleGrid[getX()-1][getY()].density < 999){
-                    g.particleGrid[getX()-1][getY()].velocity[0] += this.velocity[0];
-                    this.velocity[0] = 0;
+                        g.particleGrid[getX()-1][getY()].velocity[0] += this.velocity[0];
+                        this.velocity[0] = 0;
                 }
                 else{
                     this.velocity[0] = 0;
@@ -166,8 +162,6 @@ public class Particle {
             else{
                 this.velocity[0] = 0;
             }
-            if(velocity[0] < 0)
-                velocity[0] += 1;
         }
     }
 
@@ -385,12 +379,6 @@ public class Particle {
         }
     }
 
-    public void resetGravMarkers(){
-        beenGravLeft = false; //has already been pulled left by a gravwell this tick
-        beenGravRight = false;
-        beenGravUp = false;
-        beenGravDown = false;
-    }
 
     public void damage(int d, Grid g){
         if(!invincible){
@@ -416,6 +404,136 @@ public class Particle {
 
         c = new Color(r, g, b);
         rgb = c.getRGB();
+    }
+
+    //returns array of order to try velocity movements in
+    //1s for x direction, 2s for y direction
+    public int[] getVelocityInstructions(){
+        int[] instructions = new int[Math.abs(velocity[0]) + Math.abs(velocity[1])];
+        int dx = Math.abs(velocity[0]);
+        int dy = Math.abs(velocity[1]);
+
+        if(velocity[0] == 0){
+            for(int i = 0; i < dy; i++){
+                instructions[i] = 2;
+            }
+            return instructions;
+        }
+        if(velocity[1] == 0){
+            for(int i = 0; i < dx; i++){
+                instructions[i] = 1;
+            }
+            return instructions;
+        }
+
+        int ratio;
+        int current = 0;
+        if (Math.abs(velocity[0]) > Math.abs(velocity[1])){
+            ratio = (int) (dx/dy);
+            for(int i=0; i<instructions.length; i++){
+                if(current <= ratio && dx > 0){
+                    instructions[i] = 1;
+                    current++;
+                    dx--;
+                }
+                else if(dy > 0){
+                    instructions[i] = 2;
+                    current = 0;
+                    dy--;
+                }
+            }
+            return instructions;
+        }
+        else{
+            ratio = (int) (dy/dx);
+            for(int i=0; i<instructions.length; i++){
+                if(current <= ratio && dy > 0){
+                    instructions[i] = 2;
+                    current++;
+                    dy--;
+                }
+                else if(dx > 0){
+                    instructions[i] = 1;
+                    current = 0;
+                    dx--;
+                }
+            }
+            return instructions;
+        }
+    }
+
+    public void doVeloRightUp(Grid g){
+        if(velocity[0] >= 0 && velocity[1] >= 0){
+            tryVelocity(g);
+        }
+    }
+
+    public void doVeloLeftUp(Grid g){
+        if(velocity[0] <= 0 && velocity[1] >= 0){
+            tryVelocity(g);
+        }
+    }
+
+    public void doVeloRightDown(Grid g){
+        if(velocity[0] >= 0 && velocity[1] <= 0){
+            tryVelocity(g);
+        }
+    }
+
+    public void doVeloLeftDown(Grid g){
+        if(velocity[0] <= 0 && velocity[1] <= 0){
+            tryVelocity(g);
+        }
+    }
+
+    public void tryVelocity(Grid g){
+        if(!hasMoved){
+        if(velocity[0] > 10)
+            velocity[0] = 10;
+        if(velocity[1] > 10)
+            velocity[1] = 10;
+        if(velocity[0] < -10)
+            velocity[0] = -10;
+        if(velocity[1] < -10)
+            velocity[1] = -10;
+
+        int[] instructionOrder = getVelocityInstructions();
+        if(velocity[0] == 0 && velocity[1] == 0){
+            return;
+        }
+
+        for(int i = 0; i < instructionOrder.length; i++){
+            if(instructionOrder[i] == 1){
+                if (velocity[0] > 0){
+                    tryVelocityRight(g);
+                }
+                else{
+                    tryVelocityLeft(g);
+                }
+            }
+            else if(instructionOrder[i] == 2){
+                if (velocity[1] > 0){
+                    tryVelocityUp(g);
+                }
+                else{
+                    tryVelocityDown(g);
+                }
+            }
+        }
+
+        //apply friction
+        if(Math.random() * 100 < friction){
+            if(this.velocity[1] > 0)
+                    velocity[1] -= 1;
+            if(this.velocity[1] < 0)
+                    velocity[1] += 1;
+            if(this.velocity[0] > 0)
+                    velocity[0] -= 1;
+            if(this.velocity[0] < 0)
+                    velocity[0] += 1;
+        }
+        hasMoved = true;
+        }
     }
 }
         
