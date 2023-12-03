@@ -26,6 +26,8 @@ public class Menu{
     public Rectangle blackHoleButton = new Rectangle(240, 555, 60, 25);
 
     public Rectangle c4Button = new Rectangle(310, 495, 60, 25);
+    public Rectangle nitroButton = new Rectangle(310, 525, 60, 25);
+    public Rectangle methaneButton = new Rectangle(310, 555, 60, 25);
 
     public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
     public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
@@ -69,12 +71,16 @@ public class Menu{
         g2d.draw(gpButton);
         g.drawString("Conway",  conwayButton.x+6, conwayButton.y+18);
         g2d.draw(conwayButton);
-        g.drawString("GravWell",  gravWellButton.x+3, gravWellButton.y+18);
+        g.drawString("GravWll",  gravWellButton.x+3, gravWellButton.y+18);
         g2d.draw(gravWellButton);
         g.drawString("BH",  blackHoleButton.x+15, blackHoleButton.y+18);
         g2d.draw(blackHoleButton);
         g.drawString("C4",  c4Button.x+15, c4Button.y+18);
         g2d.draw(c4Button);
+        g.drawString("Nitro",  nitroButton.x+12, nitroButton.y+18);
+        g2d.draw(nitroButton);
+        g.drawString("Methane",  nitroButton.x+3, methaneButton.y+18);
+        g2d.draw(methaneButton);
     }
 
 

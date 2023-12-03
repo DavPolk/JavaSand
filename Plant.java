@@ -12,6 +12,7 @@ public class Plant extends Solid {
         rgb = c.getRGB();
         flammability = 10;
         baseColor = c;
+        invincible = false;
     }
 
     @Override
@@ -44,8 +45,10 @@ public class Plant extends Solid {
         else{
             ArrayList<int[]> adjEmpties = g.getNeighborsOfElement(getX(), getY(), Element.EMPTY);
             Collections.shuffle(adjEmpties);
-            g.spawnElement(adjEmpties.get(0)[0], adjEmpties.get(0)[1], Element.PLANT);
-            saturation -= thirstiness;
+            if(adjEmpties.size() > 0){
+                g.spawnElement(adjEmpties.get(0)[0], adjEmpties.get(0)[1], Element.PLANT);
+                saturation -= thirstiness;
+            }
         }
         
     }

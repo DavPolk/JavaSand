@@ -65,9 +65,25 @@ public class MouseMotionInput extends MouseAdapter{
         // public Rectangle blackHoleButton = new Rectangle(240, 555, 60, 25);
 
         // public Rectangle c4Button = new Rectangle(310, 495, 60, 25);
+        // public Rectangle nitroButton = new Rectangle(310, 525, 60, 25);
+        // public Rectangle methaneButton = new Rectangle(310, 555, 60, 25);
 
         // public Rectangle spoutButton = new Rectangle( 640, 495, 60, 25);
         // public Rectangle resetButton = new Rectangle(640, 555, 60, 25);
+
+        //methane button
+        if (mx >= 310 && mx <= 370){
+            if (my >= 555 && my <= 580){
+                game.selectedElement = Element.METHANE;
+            }
+        }
+
+        //nitro button
+        if (mx >= 310 && mx <= 370){
+            if (my >= 525 && my <= 550){
+                game.selectedElement = Element.NITRO;
+            }
+        }
 
         //c4 button
         if (mx >= 310 && mx <= 370){

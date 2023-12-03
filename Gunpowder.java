@@ -9,5 +9,6 @@ public class Gunpowder extends Particulate{
         rgb = c.getRGB();
         density = 2.5;
         baseColor = c;
+        invincible = false;
     }
 }

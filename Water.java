@@ -10,5 +10,6 @@ public class Water extends Fluid{
         density = 1.5;
         element = Element.WATER;
         baseColor = c;
+        invincible = false;
     }
 }

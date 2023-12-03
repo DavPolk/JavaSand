@@ -9,7 +9,8 @@ public class Stone extends Solid {
         element = Element.STONE;
         density = 999;
         baseColor = c;
-        maxHealth = 100;
+        maxHealth = 200;
         health = maxHealth;
+        invincible = false;
     }
 }

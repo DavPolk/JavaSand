@@ -88,6 +88,12 @@ public class Grid {
             particleGrid[x][y] = new BlackHole(x, y);
         if(e == Element.C4)
             particleGrid[x][y] = new C4(x, y);
+        if(e == Element.NITRO)
+            particleGrid[x][y] = new Nitro(x, y);
+        if(e == Element.METHANE)
+            particleGrid[x][y] = new Methane(x, y);
+        if(e == Element.SMOKE)
+            particleGrid[x][y] = new Smoke(x, y);
     }
 
     public void paintSpout(int x, int y, Element e, int brushSize){

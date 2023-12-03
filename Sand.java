@@ -10,5 +10,6 @@ public class Sand extends Particulate{
         density = 2.0;
         element = Element.SAND;
         baseColor = c;
+        invincible = false;
     }
 }

@@ -4,7 +4,8 @@ import java.util.Collections;
 
 public class Fire extends Solid{
 
-    public int douseChance = 10; //% chance to be deleted per adjacent water
+    public int douseChance = 0; //% chance to be deleted per adjacent water
+    public int smokeChance = 10; //% chance to spawn smoke per tick
 
     public Fire(int x, int y) {
         super(x, y);
@@ -27,6 +28,15 @@ public class Fire extends Solid{
     @Override
     public void update(Grid g){
 
+        if(health == 1){
+            if(getY() < g.gridSizeY-1){
+                if(Math.random()*100 < smokeChance){
+                    if(g.particleGrid[getX()][getY()+1].isEmpty){
+                        g.spawnElement(getX(), getY()+1, Element.SMOKE);
+                    }
+                }
+            }
+        }
         checkDead(g);
         updateColor();
 

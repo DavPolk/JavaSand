@@ -1,35 +1,43 @@
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class C4 extends Solid{
+public class Methane extends Gas{
+    private int maxFlow = 3;
+    private int nudgePercentage = 10;
+    private int explosionRadius = 8;
+    private int explosionMaxDmg = 10;
+    private int explosionStrength = 1;
 
-    public int explosionRadius = 30;
-    public int explosionStrength = 2;
-    public int explosionMaxDmg = 15;
-
-    public C4(int x, int y) {
+    public Methane(int x, int y) {
         super(x, y);
-        c = new Color(190, 160, 80);
+        c = new Color(80, 67, 10);
+        isEmpty = false;
         rgb = c.getRGB();
+        density = 0.1;
+        element = Element.METHANE;
         baseColor = c;
         invincible = false;
     }
 
-
     @Override
     public void update(Grid g){
-        if (health <= 0){
+    if (health <= 0){
             explode(g);
             return;
         }
         ArrayList<int[]> fireNeighbors = g.getNeighborsOfElement(getX(), getY(), Element.FIRE);
         if (fireNeighbors.size() > 0){
             explode(g);
+            return;
         }
-    }
 
-    @Override
-    public void checkDead(Grid g){
+
+        if(!ignoreNextGravity){
+            gasUpdate(g, maxFlow, nudgePercentage);
+        }
+        else{
+            ignoreNextGravity = false;
+        }
     }
 
     public void explode(Grid g){
@@ -40,8 +48,7 @@ public class C4 extends Solid{
                     if(i > 0 && i < g.gridSizeX - 1){
                         if(j > 0 && j < g.gridSizeY - 1){
                             if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
+                            if(g.particleGrid[i][j].isEmpty){
                                     g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
@@ -67,9 +74,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
-                                    g.spawnElement(i, j, Element.FIRE);
+                            if(g.particleGrid[i][j].isEmpty){
+                                g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
@@ -95,9 +101,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
-                                    g.spawnElement(i, j, Element.FIRE);
+                            if(g.particleGrid[i][j].isEmpty){
+                                g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){
@@ -122,9 +127,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
-                                    g.spawnElement(i, j, Element.FIRE);
+                            if(g.particleGrid[i][j].isEmpty){
+                                g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){

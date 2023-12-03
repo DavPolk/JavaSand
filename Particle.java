@@ -21,7 +21,7 @@ public class Particle {
     public int[] velocity = {0, 0};
     public int maxHealth = 100;
     public int health = 100;
-    public boolean invincible = false;
+    public boolean invincible = true;
 
             //default particles act as empty cells for the grid
             //Element types extend Particle and override constructor and update functions
@@ -335,7 +335,7 @@ public class Particle {
             if (Math.random()*100 < nudgePercentage){
                 if(Math.random()*2 >= 1){
                     if(getX() < g.gridSizeX-1){
-                        if(g.particleGrid[getX()+1][getY()-1].isEmpty){
+                        if(g.particleGrid[getX()+1][getY()-1].density < this.density){
                             g.swap(getX(), getY(), getX()+1, getY()-1);
                             return true;
                         }
@@ -343,7 +343,7 @@ public class Particle {
                 }
                 else{
                     if(getX() > 0){
-                        if(g.particleGrid[getX()-1][getY()-1].isEmpty){
+                        if(g.particleGrid[getX()-1][getY()-1].density < this.density){
                             g.swap(getX(), getY(), getX()-1, getY()-1);
                             return true;
                         }
@@ -351,7 +351,7 @@ public class Particle {
                 }
             
                 //otherwise try to go straight down
-                if(g.particleGrid[getX()][getY()].isEmpty){
+                if(g.particleGrid[getX()][getY()-1].density < this.density){
                     g.swap(getX(), getY(), getX(), getY()-1);
                     return true;
                 }
@@ -369,7 +369,7 @@ public class Particle {
     public void fluidJiggle(Grid g, int percent){
         if(Math.random()*100 <= percent){
             if((getX() != 0) && (getX() != g.gridSizeX-1)){
-                if(Math.random()*2 >= 1){
+                if(Math.random()*100 < 50){
                     if(g.particleGrid[getX()+1][getY()].isEmpty)
                         g.swap(getX(), getY(), getX()+1, getY());
                     else if(g.particleGrid[getX()-1][getY()].isEmpty)
@@ -406,16 +406,109 @@ public class Particle {
     }
 
     public void updateColor(){
-        int br = baseColor.getRed();
-        int bg = baseColor.getGreen();
-        int bb = baseColor.getBlue();
+        if(health > 0){
+            int br = baseColor.getRed();
+            int bg = baseColor.getGreen();
+            int bb = baseColor.getBlue();
 
-        int r = Math.round((br/2)+(br*health/maxHealth/2));
-        int g = Math.round((bg/2)+(bg*health/maxHealth/2));
-        int b = Math.round((bb/2)+(bb*health/maxHealth/2));
+            int r = Math.round((br/2)+(br*health/maxHealth/2));
+            int g = Math.round((bg/2)+(bg*health/maxHealth/2));
+            int b = Math.round((bb/2)+(bb*health/maxHealth/2));
 
-        c = new Color(r, g, b);
-        rgb = c.getRGB();
+            c = new Color(r, g, b);
+            rgb = c.getRGB();
+        }
     }
+
+     public boolean gasSettleUp(Grid g, int nudgePercentage, int maxFlow){
+        if(getY() == g.gridSizeY - 1){
+                //delete gas on top of grid
+                this.replaceWithEmpty(g);
+                return true;
+        }
+        //attempt to nudge
+            if (Math.random()*100 < nudgePercentage){
+                if(Math.random()*2 >= 1){
+                    if(getX() < g.gridSizeX-1){
+                        if(g.particleGrid[getX()+1][getY()+1].isEmpty){
+                            g.swap(getX(), getY(), getX()+1, getY()+1);
+                            return true;
+                        }
+                    }
+                }
+                else{
+                    if(getX() > 0){
+                        if(g.particleGrid[getX()-1][getY()+1].isEmpty){
+                            g.swap(getX(), getY(), getX()-1, getY()+1);
+                            return true;
+                        }
+                    }
+                }
+            
+                //otherwise try to go straight up
+                if(g.particleGrid[getX()][getY()+1].density > this.density && g.particleGrid[getX()][getY()+1].density < 10){
+                    g.swap(getX(), getY(), getX(), getY()+1);
+                    return true;
+                }
+            }
+
+        //check if particle above is more dense, if so swap
+        if((g.particleGrid[getX()][getY()+1].getDensity() > this.density && g.particleGrid[getX()][getY()+1].density < 10)){
+            g.swap(getX(), getY(), getX(), getY()+1);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean gasSettleLeft(Grid g, int maxFlowDist){
+        if(getY() == g.gridSizeY-1){
+                this.replaceWithEmpty(g);
+                return true;
+        }
+
+        for(int i = getX(); i >= 0; i--){
+                if(g.particleGrid[i][getY()].getDensity() > this.density){
+                    return false;
+                }
+                if((g.particleGrid[i][getY()+1].getDensity() < this.density) || g.particleGrid[i][getY()+1].isEmpty){
+                    if((getX()-i) > maxFlowDist){
+                        g.swap(getX(), getY(), getX()-maxFlowDist, getY());
+                        return true;
+                    }
+                    else{
+                        g.swap(getX(), getY(), i, getY());
+                        return true;
+                    }
+                }
+        }
+        return false;
+    }
+
+    public boolean gasSettleRight(Grid g, int maxFlowDist){
+        if(getY() == g.gridSizeY-1){
+                this.replaceWithEmpty(g);
+                return true;
+        }
+
+        for(int i = getX(); i < g.gridSizeX; i++){
+                if(g.particleGrid[i][getY()].getDensity() > this.density){
+                    return false;
+                }
+                if((g.particleGrid[i][getY()+1].getDensity() < this.density) || g.particleGrid[i][getY()+1].isEmpty){
+                    if((i - getX()) > maxFlowDist){
+                        g.swap(getX(), getY(), getX()+maxFlowDist, getY());
+                        return true;
+                    }
+                    else{
+                        g.swap(getX(), getY(), i, getY());
+                        return true;
+                    }
+                }
+            
+        }
+        return false;
+    }
+
+
 }
         

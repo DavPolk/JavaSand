@@ -10,6 +10,7 @@ public class Conway extends Solid{
         density = 0.8;
         element = Element.CONWAY;
         baseColor = c;
+        invincible = false;
     }
 
     @Override
