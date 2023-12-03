@@ -55,9 +55,9 @@ public class Grid {
 
     public void paintElement(int x, int y, Element e, int brushSize){
         for(int i = 0; i < brushSize; i++){
-            if((i+x) <= gridSizeX){
+            if((i+x) < gridSizeX){
                 for(int j = 0; j < brushSize; j++){
-                    if((i+j) <= gridSizeY){
+                    if((y+j) < gridSizeY){
                         spawnElement(x+i, y+j, e);
                     }
                 }
@@ -98,9 +98,9 @@ public class Grid {
 
     public void paintSpout(int x, int y, Element e, int brushSize){
         for(int i = 0; i < brushSize; i++){
-            if((i+x) <= gridSizeX){
+            if((i+x) < gridSizeX){
                 for(int j = 0; j < brushSize; j++){
-                    if((i+j) <= gridSizeY){
+                    if((y+j) < gridSizeY){
                         spawnSpout(x+i, y+j, e);
                     }
                 }

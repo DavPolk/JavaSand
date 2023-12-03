@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Methane extends Gas{
     private int maxFlow = 3;
     private int nudgePercentage = 10;
-    private int explosionRadius = 8;
-    private int explosionMaxDmg = 10;
+    private int explosionRadius = 20;
+    private int explosionMaxDmg = 15;
     private int explosionStrength = 1;
 
     public Methane(int x, int y) {
@@ -48,8 +48,8 @@ public class Methane extends Gas{
                     if(i > 0 && i < g.gridSizeX - 1){
                         if(j > 0 && j < g.gridSizeY - 1){
                             if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty){
-                                    g.spawnElement(i, j, Element.FIRE);
+                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 20){
+                                 g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
                                 if(Math.random() > (g.distBetween(getX(), getY(), i, j) / explosionRadius)){

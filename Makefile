@@ -77,8 +77,8 @@ run: default
 
 # Remove class files
 clean:
-	rm -f *.class javaSand.jar
+	rm -f *.class JavaSand.jar
 
 jar: default
-	jar cfm javaSand.jar manifest.txt *.class
-	java -cp javaSand.jar GameCanvas
+	jar cfm javaSand.jar MANIFEST.mf *.class
+	java -jar javaSand.jar

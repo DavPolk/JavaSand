@@ -9,7 +9,7 @@ public class C4 extends Solid{
 
     public C4(int x, int y) {
         super(x, y);
-        c = new Color(190, 160, 80);
+        c = new Color(120, 100, 60);
         rgb = c.getRGB();
         baseColor = c;
         invincible = false;
@@ -40,8 +40,8 @@ public class C4 extends Solid{
                     if(i > 0 && i < g.gridSizeX - 1){
                         if(j > 0 && j < g.gridSizeY - 1){
                             if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
+                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 30){
+                                if(g.distBetween(getX(), getY(), i, j) <= 3)
                                     g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
@@ -67,8 +67,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
+                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 30){
+                                if(g.distBetween(getX(), getY(), i, j) <= 3)
                                     g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
@@ -95,8 +95,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
+                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 30){
+                                if(g.distBetween(getX(), getY(), i, j) <= 3)
                                     g.spawnElement(i, j, Element.FIRE);
                             }
                             else{
@@ -122,8 +122,8 @@ public class C4 extends Solid{
                 if(i > 0 && i < g.gridSizeX - 1){
                     if(j > 0 && j < g.gridSizeY - 1){
                         if(g.distBetween(getX(), getY(), i, j) <= explosionRadius){
-                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 2){
-                                if(g.distBetween(getX(), getY(), i, j) <= 2)
+                            if(g.particleGrid[i][j].isEmpty && Math.random()*100 < 30){
+                                if(g.distBetween(getX(), getY(), i, j) <= 3)
                                     g.spawnElement(i, j, Element.FIRE);
                             }
                             else{

@@ -27,11 +27,13 @@ public class Spout extends Solid{
     public void update(Grid g){
 
         if(currentElement == Element.FIRE){
+            if(getX() != 0 && getX() < g.gridSizeX-1 && getY() != 0 && getY() < g.gridSizeY-1){
             g.spawnElement(getX(), getY()+1, currentElement);
             g.spawnElement(getX(), getY()-1, currentElement);
+            }
         }
         else if(currentElement == Element.CONWAY){
-            if(getX() != 0 && getX() < g.gridSizeX && getY() != 0 && getY() < g.gridSizeY){
+            if(getX() != 0 && getX() < g.gridSizeX-1 && getY() != 0 && getY() < g.gridSizeY-1){
                 if(Math.random() * 3 >= 1){
                     g.spawnElement(getX(), getY()+1, currentElement);
                 }

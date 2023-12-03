@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Nitro extends Fluid{
 
-    private int explosionRadius = 8;
+    private int explosionRadius = 12;
     private int explosionMaxDmg = 4;
     private int explosionStrength = 1;
     public Nitro(int x, int y) {

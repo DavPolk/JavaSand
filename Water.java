@@ -12,4 +12,8 @@ public class Water extends Fluid{
         baseColor = c;
         invincible = false;
     }
+
+    @Override
+    public void updateColor(){
+    }
 }
