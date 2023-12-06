@@ -49,7 +49,8 @@ public class Spout extends Solid{
             }
         }
         else if(Math.random()*100 <= spawnPercent){
-            g.spawnElement(getX(), getY()-1, currentElement);
+            if(getY() > 0)
+                g.spawnElement(getX(), getY()-1, currentElement);
         }
     }
 }
